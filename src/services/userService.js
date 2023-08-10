@@ -40,3 +40,11 @@ export const resendEmail = (email) => {
     body: JSON.stringify({ email }),
   });
 }
+
+export const logoutUser = () => {
+  return fetch(`${API_URL}logout/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+  });
+}

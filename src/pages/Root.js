@@ -76,8 +76,8 @@ function Root() {
     <TokenContext.Provider value={{ isTokenChecked, setTokenChecked: setIsTokenChecked }}>
       <>
         <ToastContainer />
-        <Navbar />
-        <Outlet />
+          <Navbar />
+          <Outlet />
         <Footer />
       </>
     </TokenContext.Provider>
