@@ -66,3 +66,14 @@ label {
   z-index: 1;
   color: green;
 }
+
+.link-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: blue;
+}
