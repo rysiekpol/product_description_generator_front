@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
+
 const ResendEmailForm = ({onSubmit}) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 

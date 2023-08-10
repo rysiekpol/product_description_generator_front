@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { createProduct } from '../services/productService';  
 import ProductForm from '../components/form/ProductForm';
+import { showToast } from '../utils/toastUtils';
+
 
 const Home = () => {
   const [name, setName] = useState('');
@@ -11,6 +13,7 @@ const Home = () => {
 
     const result = await createProduct(name, uploadedImages);
     if (result.success) {
+      showToast('Product created', 'success');
       console.log('Product created:', result.data);
       // Clear the form for a new submission or give user feedback
       setName('');

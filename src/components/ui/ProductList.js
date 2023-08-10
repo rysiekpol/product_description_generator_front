@@ -3,6 +3,7 @@ import ProductImageSlider from './ProductImageSlider';
 import ProductDescription from './ProductDescription';
 import Pagination from './Pagination';
 
+
 const ProductList = ({ products, handleAddDescription, setCurrentProduct, setShowUpdateForm, prevPage, nextPage, setCurrentPage }) => {
     return (
         <div className="container mt-5 justify-content-center w-50">

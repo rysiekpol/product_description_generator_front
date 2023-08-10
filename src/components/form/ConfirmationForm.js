@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
+
 const ConfirmationForm = ({ onSubmit, changeResendState }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 

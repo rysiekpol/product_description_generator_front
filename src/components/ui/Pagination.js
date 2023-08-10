@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Pagination = ({ currentPage, prevPage, nextPage, onPrevious, onNext }) => {
   return (
     <div className="d-flex justify-content-center">

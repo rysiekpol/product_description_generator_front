@@ -14,6 +14,7 @@ import jwtDecode from 'jwt-decode';
 
 import { refreshToken } from '../services/tokenValidation';
 
+
 function Root() {
   const [isTokenChecked, setIsTokenChecked] = useState(false);
   const navigate = useNavigate();

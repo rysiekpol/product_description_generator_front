@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../../main_logo.svg';
 import "./NavbarStyles.css";
 
+
 class Navbar extends Component {
   state = { clicked: false };
 

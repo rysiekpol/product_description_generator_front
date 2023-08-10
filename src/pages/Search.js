@@ -6,7 +6,7 @@ import ProductList from '../components/ui/ProductList';
 import SearchBar from '../components/ui/SearchBar';
 import { fetchProducts  } from '../services/searchProducts';
 import { handleAddDescription } from '../utils/descriptionUtils';
-
+import { useDebounce } from 'usehooks-ts'
 
 
 const Search = () => {
@@ -18,16 +18,18 @@ const Search = () => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
 
+  const debouncedValue = useDebounce(searchTerm, 500)
+
   const fetchData = useCallback(async () => {
     try {
-        const data = await fetchProducts(searchTerm, currentPage);
+        const data = await fetchProducts(debouncedValue, currentPage);
         setProducts(data.results);
         setNextPage(data.next);
         setPrevPage(data.previous);
     } catch (error) {
         console.error(error);
     }
-  }, [searchTerm, currentPage]);
+  }, [debouncedValue, currentPage]);
 
   useEffect(() => {
       fetchData();

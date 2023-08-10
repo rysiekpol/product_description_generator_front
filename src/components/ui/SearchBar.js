@@ -1,4 +1,5 @@
 const SearchBar = ({ searchTerm, setSearchTerm }) => {
+
     return (
       <div className="d-flex justify-content-center mt-5">
         <div className="input-group input-group-lg w-50">

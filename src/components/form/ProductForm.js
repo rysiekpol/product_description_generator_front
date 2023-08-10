@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const ProductForm = ({ name, setName, uploadedImages, setUploadedImages, handleSubmit }) => {
   return (
     <div className="Auth-form-container">

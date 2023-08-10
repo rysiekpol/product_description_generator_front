@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const ProductDescription = ({ descriptions, onAddDescription }) => {
   if (descriptions.length === 0) {
     return (

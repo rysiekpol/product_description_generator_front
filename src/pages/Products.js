@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import TokenContext from '../context/TokenContext';  // Adjust the path accordingly.
-import UpdateProduct from '../components/form/UpdateProductForm';  // Adjust the path if needed
+import TokenContext from '../context/TokenContext'; 
+import UpdateProduct from '../components/form/UpdateProductForm';
 import { fetchProducts } from '../services/fetchProducts';
 import ProductList from '../components/ui/ProductList';
 import { handleAddDescription } from '../utils/descriptionUtils';

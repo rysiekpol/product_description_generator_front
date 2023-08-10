@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import {toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import SignInForm from '../components/form/SignInForm';
 import SignUpForm from '../components/form/SignUpForm';
@@ -7,6 +6,7 @@ import ResetPasswordForm from '../components/form/ResetPasswordForm';
 import ConfirmationForm from '../components/form/ConfirmationForm';
 import ResendEmailForm from '../components/form/ResendEmailForm';
 import {loginUser, registerUser, resetPassword, confirmEmail, resendEmail} from '../services/userService';
+import { showToast } from '../utils/toastUtils';
 
 
 function Authorization() {
@@ -34,16 +34,7 @@ function Authorization() {
     confirmEmail(data.confirmationToken)
       .then(response => response.json())
       .then(data => {
-        toast.info("You may now login", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        showToast("You may now login");
         setShowConfirmation(false)
       })
       .catch((error) => {
@@ -59,43 +50,17 @@ function Authorization() {
       .then(data => {
         if (data.non_field_errors){
           if (data.non_field_errors[0] === "E-mail is not verified.") {
-            toast.info("Please check your email for the confirmation token", {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
+            showToast("Please check your email for confirmation token");
             setShowConfirmation(true)
           }
           else {
-          toast.info(data.non_field_errors[0], {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
+            showToast(data.non_field_errors[0]);
+
           }
           }
 
         else {
-          toast.success("Logged in successfully", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
+          showToast("Logged in successfully", "success");
           localStorage.setItem('access_token', data.access)
           navigate('/')
         }
@@ -112,27 +77,9 @@ function Authorization() {
     registerUser(data.email, data.password, data.password2)
       .then(response => response.json())
       .then(data => {
-        toast.info(data.detail, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          });
+        showToast(data.detail)
         if (data.detail === "Verification e-mail sent.") {
-          toast.info("Please check your email for the confirmation token", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
+          showToast("Please check your email for the confirmation token")
           setShowConfirmation(true)
         }
         console.log('Success:', data);
@@ -148,17 +95,8 @@ function Authorization() {
       .then(response => response.json())
       .then(data => {
         if (data.detail === "Password reset e-mail has been sent.") {
-          toast.info("Please check your email for the password reset token", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
-            changeResetState();
+          showToast("Please check your email for the password reset token")
+          changeResetState();
         }
         console.log('Success:', data);
       })
@@ -173,17 +111,7 @@ function Authorization() {
       .then(response => response.json())
       .then(data => {
         if (data.detail === "ok") {
-          toast.info("Please check your email for the confirmation token", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
-            changeResendState();
+          showToast("Please check your email for the confirmation token")
         }
         console.log('Success:', data);
       })
