@@ -36,6 +36,8 @@ const ProductList = ({ products, handleAddDescription, setCurrentProduct, setSho
                             <ProductDescription
                                 descriptions={product.descriptions}
                                 onAddDescription={() => handleAddDescription(product.id)}
+                                productId={product.id}  
+                                fetchData={fetchData}
                             />
                         </p>
                     </div>
