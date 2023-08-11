@@ -53,6 +53,7 @@ const Products = () => {
             prevPage={prevPage}
             nextPage={nextPage}
             setCurrentPage={setCurrentPage}
+            fetchData={fetchData}
         />
       )}
     </div>

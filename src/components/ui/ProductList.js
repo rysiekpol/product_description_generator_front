@@ -2,9 +2,10 @@ import React from 'react';
 import ProductImageSlider from './ProductImageSlider';
 import ProductDescription from './ProductDescription';
 import Pagination from './Pagination';
+import { deleteProduct } from '../../services/deleteProducts';
 
 
-const ProductList = ({ products, handleAddDescription, setCurrentProduct, setShowUpdateForm, prevPage, nextPage, setCurrentPage }) => {
+const ProductList = ({ products, handleAddDescription, setCurrentProduct, setShowUpdateForm, prevPage, nextPage, setCurrentPage, fetchData }) => {
     return (
         <div className="container mt-5 justify-content-center w-50">
             {products.map((product, index) => (
@@ -20,6 +21,12 @@ const ProductList = ({ products, handleAddDescription, setCurrentProduct, setSho
                                 setShowUpdateForm(true);
                             }}>
                             Update
+                        </button>
+
+                        <button
+                            className="link-danger link-button ml-2"
+                            onClick={() => {deleteProduct(product.id, fetchData);}}>
+                            &nbsp;Delete
                         </button>
 
                         {/* Image Grid */}
