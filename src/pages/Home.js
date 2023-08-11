@@ -15,7 +15,6 @@ const Home = () => {
     if (result.success) {
       showToast('Product created', 'success');
       console.log('Product created:', result.data);
-      // Clear the form for a new submission or give user feedback
       setName('');
       setUploadedImages([]);
     } else {

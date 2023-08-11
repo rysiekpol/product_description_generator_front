@@ -58,6 +58,9 @@ class Navbar extends Component {
               <li>
                 <NavLink to="/search">Search</NavLink>
               </li>
+              <li>
+                <NavLink to="/shares">My Shares</NavLink>
+              </li>
             </ul>
           </div>
 

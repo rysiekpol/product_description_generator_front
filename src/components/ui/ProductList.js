@@ -5,13 +5,24 @@ import Pagination from './Pagination';
 import { deleteProduct } from '../../services/deleteProducts';
 
 
-const ProductList = ({ products, handleAddDescription, setCurrentProduct, setShowUpdateForm, prevPage, nextPage, setCurrentPage, fetchData }) => {
-    return (
+const ProductList = ({ products, handleAddDescription, setCurrentProduct, setShowUpdateForm, setShowShareForm, prevPage, nextPage, setCurrentPage, fetchData }) => {
+    return (            
         <div className="container mt-5 justify-content-center w-50">
             {products.map((product, index) => (
                 <div className="card mb-4 mt-5" key={index}>
                     <div className="card-body">
                         <h5 className="card-title">{product.name}</h5>
+
+                        <button
+                            className="link-primary link-button ml-2"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentProduct(product);
+                                setShowShareForm(true);
+                                }}>
+                            Share
+                        </button>
+
                         <button
                             href="#"
                             className="link-primary link-button"
@@ -20,7 +31,7 @@ const ProductList = ({ products, handleAddDescription, setCurrentProduct, setSho
                                 setCurrentProduct(product);
                                 setShowUpdateForm(true);
                             }}>
-                            Update
+                            &nbsp;Update
                         </button>
 
                         <button
