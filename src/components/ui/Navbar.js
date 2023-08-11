@@ -3,10 +3,11 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../../main_logo.svg';
 import "./NavbarStyles.css";
 import { logoutUser } from '../../services/userService';  // Import the logout function
+import UserContext from "../../context/UserContext";
 
 class Navbar extends Component {
-
-  state = { clicked: false, isLoggedIn: false };
+  static contextType = UserContext; 
+  state = { clicked: false};
 
   handleClick = () => {
     this.setState({ clicked: !this.state.clicked });
@@ -15,14 +16,14 @@ class Navbar extends Component {
   componentDidMount() {
     const token = localStorage.getItem('access_token');
     if (token) {
-      this.setState({ isLoggedIn: true });
+      this.context.setLoggedIn(true);
     }
   }
 
   handleLogout = () => {
     logoutUser().then(() => {
       localStorage.removeItem('access_token');
-      this.setState({ isLoggedIn: false });
+      this.context.setLoggedIn(false);
     });
   };
 
@@ -42,7 +43,7 @@ class Navbar extends Component {
                   Home
                 </NavLink>
               </li>
-              {!this.state.isLoggedIn ? (
+              {!this.context.isLoggedIn ? (
                 <li>
                   <NavLink to="/signin">Sign In</NavLink>
                 </li>

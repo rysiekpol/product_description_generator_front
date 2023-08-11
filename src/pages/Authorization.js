@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom";
 import SignInForm from '../components/form/SignInForm';
 import SignUpForm from '../components/form/SignUpForm';
@@ -7,6 +7,7 @@ import ConfirmationForm from '../components/form/ConfirmationForm';
 import ResendEmailForm from '../components/form/ResendEmailForm';
 import {loginUser, registerUser, resetPassword, confirmEmail, resendEmail} from '../services/userService';
 import { showToast } from '../utils/toastUtils';
+import UserContext from "../context/UserContext";
 
 
 function Authorization() {
@@ -15,6 +16,7 @@ function Authorization() {
   let [showConfirmation, setShowConfirmation] = useState(false)
   let [showResetPassword, setShowResetPassword] = useState(false)
   let [showResendEmail, setShowResendEmail] = useState(false)
+  const userContext = useContext(UserContext);
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
@@ -62,6 +64,7 @@ function Authorization() {
         else {
           showToast("Logged in successfully", "success");
           localStorage.setItem('access_token', data.access)
+          userContext.setLoggedIn(true);
           navigate('/')
         }
         console.log('Success:', data);

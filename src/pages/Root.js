@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import TokenContext from '../context/TokenContext';
+import UserContext from '../context/UserContext';
 
 import jwtDecode from 'jwt-decode';
 
@@ -16,6 +17,7 @@ import { refreshToken } from '../services/tokenValidation';
 
 
 function Root() {
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [isTokenChecked, setIsTokenChecked] = useState(false);
   const navigate = useNavigate();
 
@@ -68,7 +70,6 @@ function Root() {
 
       checkTokenValidity();
       setIsTokenChecked(true);
-      console.log('isTokenChecked:', isTokenChecked);
     }
   }, [navigate, isTokenChecked]);
 
@@ -76,8 +77,10 @@ function Root() {
     <TokenContext.Provider value={{ isTokenChecked, setTokenChecked: setIsTokenChecked }}>
       <>
         <ToastContainer />
-          <Navbar />
-          <Outlet />
+          <UserContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+            <Navbar />
+            <Outlet />
+          </UserContext.Provider>
         <Footer />
       </>
     </TokenContext.Provider>
