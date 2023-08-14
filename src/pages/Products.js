@@ -3,12 +3,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TokenContext from '../context/TokenContext'; 
 import UpdateProduct from '../components/form/UpdateProductForm';
+import ShareForm from '../components/form/ShareForm';
+import TranslationForm from '../components/form/TranslationForm';
 import { fetchProducts } from '../services/fetchProducts';
 import ProductList from '../components/ui/ProductList';
 import { handleAddDescription } from '../utils/descriptionUtils';
-import ShareForm from '../components/form/ShareForm';
 import { shareProduct } from '../services/shareProduct';
 import { showToast } from '../utils/toastUtils';
+import { translateText } from '../services/translateText';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -18,7 +20,9 @@ const Products = () => {
   const { isTokenChecked } = useContext(TokenContext);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentDescription, setCurrentDescription] = useState(null);
   const [showShareForm, setShowShareForm] = useState(false);
+  const [showTranslationForm, setShowTranslationForm] = useState(false);
 
 
   const fetchData = useCallback(async () => {
@@ -33,7 +37,6 @@ const Products = () => {
 }, [currentPage]);
 
   const handleShare = async (data, e) => {
-    console.log(data)
     const result = await shareProduct(data.productid, data.email, data.sharetime);
     if (result.success) {
       showToast('Product shared', 'success');
@@ -45,6 +48,16 @@ const Products = () => {
     setCurrentProduct(null);
   };
 
+  const handleTranslate = async (data, e) => {
+    const result = await translateText(data.descriptionid, data.languages);
+    if (result.success) {
+      showToast('Translations will be sent to your email!', 'success');
+    } else {
+      console.error('Failed to translate text:', result.error);
+    }
+    setShowTranslationForm(false);
+    setCurrentDescription(null);
+  };
 
   useEffect(() => {
     if (!isTokenChecked) return;
@@ -67,13 +80,20 @@ const Products = () => {
           productId={currentProduct.id}
           onSubmit={handleShare}
         />
+      ) : showTranslationForm ? (
+        <TranslationForm 
+          descriptionId={currentDescription.id}
+          onSubmit={handleTranslate}
+        />
       ) : (
         <ProductList 
             products={products}
             handleAddDescription={handleAddDescription}
             setCurrentProduct={setCurrentProduct}
+            setCurrentDescription={setCurrentDescription}
             setShowUpdateForm={setShowUpdateForm}
             setShowShareForm={setShowShareForm}
+            setShowTranslationForm={setShowTranslationForm}
             prevPage={prevPage}
             nextPage={nextPage}
             setCurrentPage={setCurrentPage}

@@ -4,8 +4,7 @@ import ProductDescription from './ProductDescription';
 import Pagination from './Pagination';
 import { deleteProduct } from '../../services/deleteProducts';
 
-
-const ProductList = ({ products, handleAddDescription, setCurrentProduct, setShowUpdateForm, setShowShareForm, prevPage, nextPage, setCurrentPage, fetchData }) => {
+const ProductList = ({ products, handleAddDescription, setCurrentProduct, setCurrentDescription, setShowUpdateForm, setShowShareForm, setShowTranslationForm, prevPage, nextPage, setCurrentPage, fetchData }) => {
     return (            
         <div className="container mt-5 justify-content-center w-50">
             {products.map((product, index) => (
@@ -51,6 +50,20 @@ const ProductList = ({ products, handleAddDescription, setCurrentProduct, setSho
                                 fetchData={fetchData}
                             />
                         </p>
+
+                        {product.descriptions.length > 0 ? (     
+                        <button
+                            className="link-primary link-button ml-2"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentDescription(product.descriptions[0]);
+                                setShowTranslationForm(true);
+                            }}>
+                            Translate description
+                        </button>
+                        ) : null
+                        }
+
                     </div>
                 </div>
             ))}
