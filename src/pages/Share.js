@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { myShares } from '../services/mySharesService';
-import ProductList from '../components/ui/ProductList';
+import ProductShareList from '../components/ui/ProductShareList';
 
 const ShareScreen = () => {
     const [shares, setShares] = useState([]);
@@ -31,7 +31,7 @@ const ShareScreen = () => {
 
     return (
         <div>
-            <ProductList 
+            <ProductShareList 
                 products={shares}
                 prevPage={prevPage}
                 nextPage={nextPage}
