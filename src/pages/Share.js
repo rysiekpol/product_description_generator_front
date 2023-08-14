@@ -1,39 +1,42 @@
 import React, { useState, useEffect } from 'react';
+import { myShares } from '../services/mySharesService';
+import ProductList from '../components/ui/ProductList';
 
 const ShareScreen = () => {
     const [shares, setShares] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [nextPage, setNextPage] = useState(null);
+    const [prevPage, setPrevPage] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        fetch('http://localhost/my-shares/')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                setShares(data);
+        async function getShares(){
+            const result = await myShares();
+            if (result.success) {
+                setShares(result.data.results);
+                setNextPage(result.data.next);
+                setPrevPage(result.data.previous);
                 setLoading(false);
-            })
-            .catch(error => {
-                setError(error);
+            }else{
+                setError(result.error);
                 setLoading(false);
-            });
-    }, []);
+            }
+        }
+        getShares();
+    }, [currentPage]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
     return (
         <div>
-            <h1>My Shares</h1>
-            <ul>
-                {shares.map((share, index) => (
-                    <li key={index}>{share.name}</li> // Assuming each share object has a name property
-                ))}
-            </ul>
+            <ProductList 
+                products={shares}
+                prevPage={prevPage}
+                nextPage={nextPage}
+                setCurrentPage={setCurrentPage}
+            />
         </div>
     );
 }

@@ -21,6 +21,7 @@ const Search = () => {
   const debouncedValue = useDebounce(searchTerm, 500)
 
   const fetchData = useCallback(async () => {
+    if (debouncedValue !== ""){
     try {
         const data = await fetchProducts(debouncedValue, currentPage);
         setProducts(data.results);
@@ -29,6 +30,7 @@ const Search = () => {
     } catch (error) {
         console.error(error);
     }
+  }
   }, [debouncedValue, currentPage]);
 
   useEffect(() => {
