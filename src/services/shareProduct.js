@@ -1,14 +1,13 @@
 // productService.js
 
 export const shareProduct = async (productId, userMail, shareTime) => {
+  console.log(shareTime)
     try {
         const payload = {
             product_id: productId,
             user_email: userMail,
             share_time: shareTime
         };
-
-        console.log(JSON.stringify(payload));
     
       const response = await fetch('http://localhost:5001/share/', {
         method: 'POST',

@@ -33,7 +33,7 @@ const Products = () => {
 }, [currentPage]);
 
   const handleShare = async (data, e) => {
-    e.preventDefault();
+    console.log(data)
     const result = await shareProduct(data.productid, data.email, data.sharetime);
     if (result.success) {
       showToast('Product shared', 'success');
