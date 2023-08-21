@@ -1,5 +1,5 @@
-// UpdateProductForm.js
 import React, { useState } from 'react';
+
 
 const UpdateProductForm = ({ product, onClose, refreshProducts }) => {
     const [name, setName] = useState(product.name);

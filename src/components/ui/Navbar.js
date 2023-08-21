@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '../main_logo.svg';
+import Logo from '../../main_logo.svg';
 import "./NavbarStyles.css";
+import { logoutUser } from '../../services/userService';  // Import the logout function
+import UserContext from "../../context/UserContext";
 
 class Navbar extends Component {
-  state = { clicked: false };
+  static contextType = UserContext; 
+  state = { clicked: false};
 
   handleClick = () => {
     this.setState({ clicked: !this.state.clicked });
+  };
+
+  componentDidMount() {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      this.context.setLoggedIn(true);
+    }
+  }
+
+  handleLogout = () => {
+    logoutUser().then(() => {
+      localStorage.removeItem('access_token');
+      this.context.setLoggedIn(false);
+    });
   };
 
   render() {
@@ -22,18 +39,27 @@ class Navbar extends Component {
               className={this.state.clicked ? "#navbar active" : "#navbar"}
             >
               <li>
-                <NavLink to="/home">
+                <NavLink to="/">
                   Home
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/signin">Sign In</NavLink>
-              </li>
+              {!this.context.isLoggedIn ? (
+                <li>
+                  <NavLink to="/signin">Sign In</NavLink>
+                </li>
+              ) : (
+                <li onClick={this.handleLogout}>
+                  <NavLink to="/signin">Logout</NavLink>
+                </li>
+              )}
               <li>
                 <NavLink to="/products">Products</NavLink>
               </li>
               <li>
                 <NavLink to="/search">Search</NavLink>
+              </li>
+              <li>
+                <NavLink to="/shares">My Shares</NavLink>
               </li>
             </ul>
           </div>
