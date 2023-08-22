@@ -1,4 +1,4 @@
-// productService.js
+import { API_URL } from '../utils/constants';
 
 export const shareProduct = async (productId, userMail, shareTime) => {
   console.log(shareTime)
@@ -9,7 +9,7 @@ export const shareProduct = async (productId, userMail, shareTime) => {
             share_time: shareTime
         };
     
-      const response = await fetch('http://localhost:5001/share/', {
+      const response = await fetch(`${API_URL}/share/`, {
         method: 'POST',
         credentials: 'include',
         headers: {

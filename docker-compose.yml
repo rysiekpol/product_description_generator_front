@@ -1,0 +1,17 @@
+version: "3.8"
+
+networks:
+  shared_net:
+    external: true
+
+services:
+  frontend-app:
+    container_name: frontend
+    image: frontend
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    networks:
+      - shared_net
+

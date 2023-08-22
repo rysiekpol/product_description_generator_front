@@ -1,6 +1,8 @@
+import { API_URL } from '../utils/constants';
+
 export const myShares = async () => {  
     try {
-      const response = await fetch('http://localhost:5001/my_shares/', {
+      const response = await fetch(`${API_URL}/my_shares/`, {
         method: 'GET',
         credentials: 'include',
       });

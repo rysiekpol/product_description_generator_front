@@ -1,5 +1,6 @@
 import React from 'react';
 import { showToast } from '../../utils/toastUtils';
+import { API_URL } from '../../utils/constants';
 
 
 const ProductDescription = ({ descriptions, onAddDescription, productId, fetchData }) => {

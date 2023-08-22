@@ -1,7 +1,7 @@
-const API_URL = 'http://localhost:5001/user/';
+import { API_URL } from '../utils/constants';
 
 export const confirmEmail = (token) => {
-  return fetch(`${API_URL}confirm-email/${token}/`, {
+  return fetch(`${API_URL}/confirm-email/${token}/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ key: token }),
@@ -9,7 +9,7 @@ export const confirmEmail = (token) => {
 }
 
 export const loginUser = (email, password) => {
-  return fetch(`${API_URL}login/`, {
+  return fetch(`${API_URL}/login/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -18,7 +18,7 @@ export const loginUser = (email, password) => {
 }
 
 export const registerUser = (email, password1, password2) => {
-  return fetch(`${API_URL}register/`, {
+  return fetch(`${API_URL}/register/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password1, password2 }),
@@ -26,7 +26,7 @@ export const registerUser = (email, password1, password2) => {
 }
 
 export const resetPassword = (email) => {
-  return fetch(`${API_URL}password/reset/`, {
+  return fetch(`${API_URL}/password/reset/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email }),
@@ -34,7 +34,7 @@ export const resetPassword = (email) => {
 }
 
 export const resendEmail = (email) => {
-  return fetch(`${API_URL}resend-email/`, {
+  return fetch(`${API_URL}/resend-email/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email }),
@@ -42,7 +42,7 @@ export const resendEmail = (email) => {
 }
 
 export const logoutUser = () => {
-  return fetch(`${API_URL}logout/`, {
+  return fetch(`${API_URL}/logout/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',

@@ -1,6 +1,8 @@
+import { API_URL } from '../utils/constants';
+
 export const translateText = async (descriptionId, languages) => {
     try {
-        const response = await fetch(`http://localhost/translate/`, {
+        const response = await fetch(`${API_URL}/translate/`, {
             method: 'POST',
             credentials: 'include',
             headers: {

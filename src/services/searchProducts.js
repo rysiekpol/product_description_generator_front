@@ -1,5 +1,7 @@
+import { API_URL } from '../utils/constants';
+
 export const fetchProducts = async (searchTerm, currentPage) => {
-    const response = await fetch(`http://localhost:5001/search/${searchTerm}?page=${currentPage}`, {
+    const response = await fetch(`${API_URL}/search/${searchTerm}?page=${currentPage}`, {
         method: 'GET',
         credentials: 'include',
     });

@@ -1,4 +1,4 @@
-// productService.js
+import { API_URL } from '../utils/constants';
 
 export const createProduct = async (name, uploadedImages) => {
   const formData = new FormData();
@@ -8,7 +8,7 @@ export const createProduct = async (name, uploadedImages) => {
   });
 
   try {
-    const response = await fetch('http://localhost:5001/product/', {
+    const response = await fetch(`${API_URL}/product/`, {
       method: 'POST',
       credentials: 'include',
       body: formData,

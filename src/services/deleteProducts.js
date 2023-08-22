@@ -1,8 +1,9 @@
 import { showToast } from '../utils/toastUtils';
+import { API_URL } from '../utils/constants';
 
 export const deleteProduct = async (productId, fetchData) => {
     try {
-        const response = await fetch(`http://localhost/product/${productId}/`, {
+        const response = await fetch(`${API_URL}/product/${productId}/`, {
             method: 'DELETE',
             credentials: 'include',
         });

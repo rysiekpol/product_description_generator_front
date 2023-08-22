@@ -1,8 +1,8 @@
-// authService.js
+import { API_URL } from '../utils/constants';
 
 const refreshToken = async () => {
     try {
-      const response = await fetch('http://localhost:5001/user/token/refresh/', {
+      const response = await fetch(`${API_URL}/user/token/refresh/`, {
         method: 'POST',
         credentials: 'include'
       });

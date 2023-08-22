@@ -1,5 +1,7 @@
+import { API_URL } from '../utils/constants';
+
 export const postDescription = async (productId) => {
-    const response = await fetch('http://localhost:5001/description/', {
+    const response = await fetch(`${API_URL}/description/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
